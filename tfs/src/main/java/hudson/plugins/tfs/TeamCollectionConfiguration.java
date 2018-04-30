@@ -55,9 +55,15 @@ public class TeamCollectionConfiguration extends AbstractDescribableImpl<TeamCol
     private ConnectionParameters connectionParameters;
 
     @DataBoundConstructor
-    public TeamCollectionConfiguration(final String collectionUrl, final String credentialsId) {
+    public TeamCollectionConfiguration(final String collectionUrl, final String credentialsId, final boolean enableSendingJobCompletionEvent, final String connectionSignature, final String serverKey) {
         this.collectionUrl = collectionUrl;
         this.credentialsId = credentialsId;
+
+        this.connectionParameters = new ConnectionParameters();
+        connectionParameters.setSendJobCompletionEvents(enableSendingJobCompletionEvent);
+        connectionParameters.setConnectionKey(serverKey);
+        connectionParameters.setConnectionSignature(connectionSignature);
+        connectionParameters.setTeamCollectionUrl(collectionUrl);
     }
 
     public String getCollectionUrl() {
@@ -68,10 +74,15 @@ public class TeamCollectionConfiguration extends AbstractDescribableImpl<TeamCol
         return credentialsId;
     }
 
+    public String getConnectionSignature() {
+        return this.connectionParameters.getConnectionSignature();
+    }
+    
+    public String getServerKey() {
+        return this.connectionParameters.getConnectionKey();
+    }
+    
     public ConnectionParameters getConnectionParameters() {
-        if (connectionParameters == null) {
-            connectionParameters = new ConnectionParameters();
-        }
         return connectionParameters;
     }
 
