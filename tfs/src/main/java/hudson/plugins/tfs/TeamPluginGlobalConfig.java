@@ -6,6 +6,7 @@ import hudson.ExtensionList;
 import hudson.plugins.tfs.model.DomainUserAccountMapper;
 import hudson.plugins.tfs.model.UserAccountMapper;
 import hudson.plugins.tfs.model.UserAccountMapperDescriptor;
+import hudson.plugins.tfs.rm.ReleaseWebhook;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
@@ -27,7 +28,8 @@ public class TeamPluginGlobalConfig extends GlobalConfiguration {
     public static final TeamPluginGlobalConfig DEFAULT_CONFIG = new TeamPluginGlobalConfig(false);
 
     private List<TeamCollectionConfiguration> collectionConfigurations = new ArrayList<TeamCollectionConfiguration>();
-
+    private List<ReleaseWebhook> releaseWebhookConfigurations = new ArrayList<ReleaseWebhook>();
+    
     private boolean configFolderPerNode;
     private boolean enableTeamPushTriggerForAllJobs;
     private boolean enableTeamStatusForAllJobs;
@@ -63,6 +65,14 @@ public class TeamPluginGlobalConfig extends GlobalConfiguration {
 
     public void setCollectionConfigurations(final List<TeamCollectionConfiguration> collectionConfigurations) {
         this.collectionConfigurations = collectionConfigurations;
+    }
+    
+    public List<ReleaseWebhook> getReleaseWebhookConfigurations() {
+        return this.releaseWebhookConfigurations;
+    }
+    
+    public void setReleaseWebhookConfigurations(final List<ReleaseWebhook> releaseWebhookConfigurations) {
+        this.releaseWebhookConfigurations = releaseWebhookConfigurations;
     }
 
     public boolean isConfigFolderPerNode() {
